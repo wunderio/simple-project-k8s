@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  silta: silta/silta@dev:master
+  silta: silta/silta@dev:feature/simple-chart-predeploy-step
 
 executors:
   silta-latest:
@@ -13,20 +13,30 @@ workflows:
   build_deploy:
     jobs:
       - silta/simple-build-deploy: &build-deploy
-          name: 'simple-development-build'
+          name: 'simple-build-deploy'
           executor: silta-latest
+
           # Use a local chart during development. 
           # Don't copy this! We only use following 2 lines for chart development in this repository.
-          chart_name: './charts/simple'
-          chart_repository: ''
-          codebase-build:
+          chart_name: "./charts/simple"
+          chart_repository: ""
+
+          #Executes after logging into cluster, docker
+          image_build_steps:
+            - silta/build-docker-image:
+                dockerfile: 'silta/nginx.Dockerfile'
+                path: 'hello'
+                identifier: 'nginx'
             - run:
                 name: Build local helm dependencies
-                command: helm dependency build ./charts/simple
+                command: |
+                  helm dependency build ./charts/simple
             - run:
                 name: Dry-run helm install
-                command: helm install --dry-run --generate-name ./charts/simple
+                command: |
+                  helm install --dry-run --generate-name ./charts/simple
           context: 'silta_dev'
+          silta_config: silta/silta.yml
           filters:
             branches:
               ignore: 'production'
