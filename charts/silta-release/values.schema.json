@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "branchName": { "type": "string" },
+    "downscaler": { "type": "object" },
+    "ingressAccess": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "additionalPodSelector": { "type": "object" },
+          "from": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "global": { "type": "object"}
+  }
+}
