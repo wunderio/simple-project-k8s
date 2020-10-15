@@ -63,7 +63,9 @@ data:
         add_header                  X-Content-Type-Options nosniff;
         add_header                  Strict-Transport-Security max-age=31536000;
         add_header                  X-XSS-Protection '1; mode=block';
-                                                                    
+
+        map_hash_bucket_size        128;
+
         map $uri $no_slash_uri {                                                                                                                           
             ~^/(?<no_slash>.*)$ $no_slash;                                                                                                                 
         }                                                            
