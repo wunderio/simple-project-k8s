@@ -3,3 +3,10 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+
+exposeDomains:
+  - hostname: test.simple.dev.wdr.io
+
+
+# ssl:
+#   enabled: false
