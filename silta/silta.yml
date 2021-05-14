@@ -3,3 +3,20 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+
+exposeDomains:
+  annotation-test:
+    hostname: simple-project-k8s-annotation-test.wdr.io
+    ingress: test
+
+ingress:
+  default:
+    extraAnnotations:
+      test-annotation: "true"
+  test:
+    type: traefik
+    tls: true
+    redirect-https: true
+    extraAnnotations:
+      networking.gke.io/suppress-firewall-xpn-error: "true"
+      test-annotation2: "true"
