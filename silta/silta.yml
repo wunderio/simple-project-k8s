@@ -6,5 +6,5 @@
 
 nginx:
   serverExtraConfig: |
-    return 200 'config changed 2';
+    return 200 'config changed 3';
     add_header Content-Type text/plain;
