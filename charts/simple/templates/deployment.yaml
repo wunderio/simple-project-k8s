@@ -14,6 +14,8 @@ spec:
       labels:
         {{ include "simple.release_labels" . | indent 8 }}
         silta-ingress: allow
+      annotations:
+        configMap-checksum: {{ include (print $.Template.BasePath "/configmap.yaml") $ | sha256sum }}
     spec:
       enableServiceLinks: false
       containers:
