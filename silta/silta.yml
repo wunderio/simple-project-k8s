@@ -3,3 +3,8 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+
+nginx:
+  serverExtraConfig: -|
+    return 200 'config changed';
+    add_header Content-Type text/plain;
