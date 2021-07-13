@@ -135,9 +135,6 @@ data:
         # Custom configuration gets included here
         {{- .Values.nginx.serverExtraConfig | nindent 8 -}}
 
-        # Custom configuration gets included here
-        {{- .Values.nginx.serverExtraConfig | nindent 8 -}}
-         
         location = /robots.txt {
           access_log off;
           {{- if not .Values.nginx.robotsTxt.allow }}
