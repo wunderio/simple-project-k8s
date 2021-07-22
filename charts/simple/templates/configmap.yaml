@@ -71,6 +71,15 @@ data:
 
         map_hash_bucket_size        128;
 
+        map $http_host $x_robots_tag_header {
+            "~{{ template "simple.domain" $ }}$" "noindex, nofollow, nosnippet, noarchive";
+            {{- range $index, $prefix := .Values.domainPrefixes }}
+            "~{{$prefix}}.{{ template "simple.domain" $ }}$" "noindex, nofollow, nosnippet, noarchive";
+            {{- end }}
+            default  '';
+        }
+        add_header                  X-Robots-Tag $x_robots_tag_header;
+
         map $uri $no_slash_uri {                                                                                                                           
             ~^/(?<no_slash>.*)$ $no_slash;                                                                                                                 
         }
@@ -136,12 +145,8 @@ data:
         {{ include "simple.basicauth" . | indent 6}}
 
         location = /robots.txt {
-          access_log off;
-          {{- if not .Values.nginx.robotsTxt.allow }}
-            add_header Content-Type text/plain;
-            return 200 'User-agent: *\nDisallow: /';
-          {{- end}}
-        } 
+            access_log off;
+        }
 
         location / {
 
