@@ -73,9 +73,6 @@ data:
 
         map $http_host $x_robots_tag_header {
             "~{{ template "simple.domain" $ }}$" "noindex, nofollow, nosnippet, noarchive";
-            {{- range $index, $prefix := .Values.domainPrefixes }}
-            "~{{$prefix}}.{{ template "simple.domain" $ }}$" "noindex, nofollow, nosnippet, noarchive";
-            {{- end }}
             default  '';
         }
         add_header                  X-Robots-Tag $x_robots_tag_header;
