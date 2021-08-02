@@ -40,6 +40,7 @@ workflows:
                 - production
                 - /feature\/test\/.*/
                 - /feature\/aws\/.*/
+                - cm-upgrade
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the test cluster deployments
@@ -50,7 +51,8 @@ workflows:
           filters:
             branches:
               only: 
-                - /feature\/test\/.*/              
+                - /feature\/test\/.*/
+                - cm-upgrade
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the aws cluster deployments
