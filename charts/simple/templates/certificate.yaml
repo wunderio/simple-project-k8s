@@ -8,6 +8,7 @@ metadata:
   name: {{ .Release.Name }}-crt
   annotations:
     cert-manager.io/issue-temporary-certificate: "true"
+    acme.cert-manager.io/http01-override-ingress-name: "{{ .Release.Name }}-simple"
   labels:
     {{- include "simple.release_labels" . | nindent 4 }}
 spec:
@@ -74,6 +75,7 @@ metadata:
   name: {{ $.Release.Name }}-crt-{{ $index }}
   annotations:
     cert-manager.io/issue-temporary-certificate: "true"
+    acme.cert-manager.io/http01-override-ingress-name: "{{ $.Release.Name }}-simple-{{ $domain.ingress }}"
   labels:
     {{- include "simple.release_labels" $ | nindent 4 }}
 spec:
