@@ -1,5 +1,5 @@
 {{- $ingress := .Values.ingress.default }}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: {{ include "ingress.api-version" . | trim }}
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-simple
@@ -53,8 +53,15 @@ spec:
       paths:
       - path: /
         backend:
+          {{- if eq ( include "ingress.api-version" . | trim ) "networking.k8s.io/v1" }}
+          service:
+            name: {{ .Release.Name }}-simple
+            port: 
+              number: 80
+          {{- else }}
           serviceName: {{ .Release.Name }}-simple
           servicePort: 80
+          {{- end }}
 ---
 # Ingresses for exposeDomains 
 {{- range $ingress_index, $ingress := $.Values.ingress }}
@@ -71,7 +78,7 @@ spec:
 {{- end }}
 
 {{- if $ingress_in_use }}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: {{ include "ingress.api-version" $ | trim }}
 kind: Ingress
 metadata:
   name: {{ $.Release.Name }}-simple-{{ $ingress_index }}
@@ -137,8 +144,15 @@ spec:
       paths:
       - path: {{ if eq $ingress.type "gce" }}/*{{ else }}/{{ end }}
         backend:
+          {{- if eq ( include "ingress.api-version" $ | trim ) "networking.k8s.io/v1" }}
+          service:
+            name: {{ $.Release.Name }}-simple
+            port: 
+              number: 80
+          {{- else }}
           serviceName: {{ $.Release.Name }}-simple
           servicePort: 80
+          {{- end }}
   {{- end }}
   {{- end }}
 ---
