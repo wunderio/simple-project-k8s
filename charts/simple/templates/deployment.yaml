@@ -81,7 +81,7 @@ spec:
         {{- end }}
 ---
 {{- if .Values.autoscaling.enabled }}
-apiVersion: {{ include "autoscaling.api-version" . | trim }}
+apiVersion: {{ include "simple.autoscaling.api-version" . | trim }}
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-simple

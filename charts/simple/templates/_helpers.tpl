@@ -57,7 +57,7 @@ networking.k8s.io/v1beta1
 {{- end }}
 {{- end }}
 
-{{- define "autoscaling.api-version" }}
+{{- define "simple.autoscaling.api-version" }}
 {{- if semverCompare ">=1.23" .Capabilities.KubeVersion.Version }}
 autoscaling/v2
 {{- else }}
