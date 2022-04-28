@@ -50,7 +50,7 @@ certmanager.k8s.io/v1alpha1
 {{- end }}
 
 {{- define "ingress.api-version" }}
-{{- if ( .Capabilities.APIVersions.Has "networking.k8s.io/v1" ) }}
+{{- if semverCompare ">=1.18" .Capabilities.KubeVersion.Version }}
 networking.k8s.io/v1
 {{- else }}
 networking.k8s.io/v1beta1
@@ -58,7 +58,7 @@ networking.k8s.io/v1beta1
 {{- end }}
 
 {{- define "simple.autoscaling.api-version" }}
-{{- if ( .Capabilities.APIVersions.Has "autoscaling/v2" ) }}
+{{- if semverCompare ">=1.23" .Capabilities.KubeVersion.Version }}
 autoscaling/v2
 {{- else }}
 autoscaling/v2beta1
