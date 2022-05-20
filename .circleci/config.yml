@@ -4,9 +4,9 @@ orbs:
   silta: silta/silta@dev:master
 
 executors:
-  silta-latest:
+  node16:
     docker:
-      - image: wunderio/silta-circleci:latest
+      - image: eu.gcr.io/silta-images/cicd:circleci-php8.0-node16-composer2-v0.1
 
 jobs:
   site-test:
@@ -35,7 +35,7 @@ workflows:
     jobs:
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy'
-          executor: silta-latest
+          executor: node16
           build_folder: hello
 
           # Use a local chart during development. 
@@ -120,7 +120,7 @@ weekly-build:
     jobs:
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy'
-          executor: silta-latest
+          executor: node16
           build_folder: hello
 
           # Use a local chart during development. 
