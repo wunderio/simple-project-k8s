@@ -56,7 +56,7 @@ spec:
   tls:
   - secretName: {{ .Release.Name }}-tls
     hosts: 
-      - {{ template "simple.domain" . | quote }}
+      - {{ template "simple.domain" . }}
   {{- end }}
   rules:
   - host: {{ template "simple.domain" . }}
@@ -154,7 +154,7 @@ spec:
   {{- if $domain.ssl.enabled }}
   - secretName: {{ $.Release.Name }}-tls-{{ $domain_index }}
     hosts:
-      - {{ $domain.hostname | quote }}
+      - {{ $domain.hostname }}
   {{- end }}
   {{- end }}
   {{- end }}
