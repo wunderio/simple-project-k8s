@@ -3,11 +3,3 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
-ingress:
-  gce:
-    staticIpAddressName: drupal-project-k8s-gke-test
-
-exposeDomains:
-  test1:
-    hostname: exposed-ing-1.drupal-project-k8s.dev.wdr.io
-    ingress: gce
