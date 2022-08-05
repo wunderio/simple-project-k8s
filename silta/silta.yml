@@ -3,3 +3,7 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+
+exposeDomains:
+  test:
+    hostname: test.feature-release-notes.simple-project-k8s.dev.wdr.io
