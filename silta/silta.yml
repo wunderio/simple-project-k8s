@@ -7,3 +7,9 @@
 exposeDomains:
   test:
     hostname: test.feature-release-notes.simple-project-k8s.dev.wdr.io
+  test2:
+    hostname: test2.feature-release-notes.simple-project-k8s.dev.wdr.io
+    ssl:
+      enabled: true
+      issuer: letsencrypt
+
