@@ -101,8 +101,8 @@ spec:
     name: {{ .Release.Name }}-simple
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
-  metrics:
   {{- if .Values.autoscaling.metrics }}
+  metrics:
   {{- if eq ( include "simple.autoscaling.api-version" . | trim ) "autoscaling/v2beta1" }}
   {{- range .Values.autoscaling.metrics }}
   - type: Resource
