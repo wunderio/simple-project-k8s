@@ -22,7 +22,7 @@
         "vpcNative": { "type": "boolean"}
       }
     },
-    "nginx": { 
+    "nginx": {
       "type": "object",
       "properties": {
         "image": { "type": "string"},
@@ -52,6 +52,12 @@
     },
     "silta-release": {
       "type": "object"
+    },
+    "logging": {
+      "type": "object",
+      "properties": {
+        "format": { "type": "string" }
+      }
     }
   }
 }
