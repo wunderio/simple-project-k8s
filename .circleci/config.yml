@@ -38,7 +38,7 @@ workflows:
           executor: node16
           build_folder: hello
 
-          # Use a local chart during development. 
+          # Use a local chart during development.
           # Don't copy this! We only use following 2 lines for chart development in this repository.
           chart_name: "./charts/simple"
           chart_repository: ""
@@ -54,7 +54,10 @@ workflows:
                 command: |
                   helm install --dry-run --generate-name ./charts/simple --values charts/simple/test.values.yaml
           context: 'silta_dev'
-          silta_config: silta/silta.yml
+          silta_config: silta/silta.yml,silta/sigsci.secret
+          codebase-build:
+            - silta/decrypt-files:
+                files: silta/sigsci.secret
           filters:
             branches:
               ignore:
@@ -71,7 +74,7 @@ workflows:
           context: silta_aks
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - site-test:
@@ -81,7 +84,7 @@ workflows:
             - 'Build & deploy master to aks cluster'
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - silta/simple-build-deploy:
@@ -92,7 +95,7 @@ workflows:
           context: silta_test
           filters:
             branches:
-              only: 
+              only:
                 - /feature\/test-cluster\/.*/
 
       - silta/simple-build-deploy:
@@ -103,7 +106,7 @@ workflows:
           context: silta_aws
           filters:
             branches:
-              only: 
+              only:
                 - /feature\/aws\/.*/
 
   weekly-build:
@@ -120,7 +123,7 @@ workflows:
           executor: node16
           build_folder: hello
 
-          # Use a local chart during development. 
+          # Use a local chart during development.
           # Don't copy this! We only use following 2 lines for chart development in this repository.
           chart_name: "./charts/simple"
           chart_repository: ""
@@ -153,7 +156,7 @@ workflows:
           context: silta_aks
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - site-test:
@@ -163,5 +166,5 @@ workflows:
             - 'Build & deploy master to aks cluster'
           filters:
             branches:
-              only: 
+              only:
                 - master
