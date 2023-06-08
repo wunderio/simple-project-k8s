@@ -1,5 +1,4 @@
 # Dockerfile for building nginx.
-#Comment to trigger rebuild
-FROM wunderio/silta-nginx:1.23-sigsci-test
+FROM wunderio/silta-nginx:v0.2
 
 COPY . /app/web
