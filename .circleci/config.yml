@@ -62,6 +62,7 @@ workflows:
                 - /feature\/test-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
+                - feature/aws
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the test cluster deployments
@@ -105,6 +106,7 @@ workflows:
             branches:
               only: 
                 - /feature\/aws\/.*/
+                - feature/aws
 
   weekly-build:
     triggers:
