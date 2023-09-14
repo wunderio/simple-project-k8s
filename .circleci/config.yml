@@ -6,7 +6,7 @@ orbs:
 executors:
   node16:
     docker:
-      - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-v0.2
+      - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-test
 
 jobs:
   site-test:
@@ -62,6 +62,7 @@ workflows:
                 - /feature\/test-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
+                - feature/amazon-cluster
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the test cluster deployments
@@ -100,11 +101,12 @@ workflows:
           <<: *build-deploy
           name: 'Build & deploy to aws cluster'
           silta_config: silta/silta.yml,silta/silta-aws.yml
-          context: silta_aws
+          context: silta_aws_poc
           filters:
             branches:
               only: 
                 - /feature\/aws\/.*/
+                - feature/amazon-cluster
 
   weekly-build:
     triggers:
@@ -144,6 +146,7 @@ workflows:
                 - /feature\/test-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
+                - feature/amazon-cluster
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the test cluster deployments
