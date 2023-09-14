@@ -99,8 +99,8 @@ workflows:
           # Extend the build-deploy configuration for the aws cluster deployments
           <<: *build-deploy
           name: 'Build & deploy to aws cluster'
-          silta_config: silta/silta.yml,silta/silta-aws.yml
-          context: silta_aws
+          silta_config: silta/silta.yml
+          context: silta_aws_poc
           filters:
             branches:
               only: 
