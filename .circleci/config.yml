@@ -6,7 +6,7 @@ orbs:
 executors:
   node16:
     docker:
-      - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-v0.2
+      - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-test
 
 jobs:
   site-test:
