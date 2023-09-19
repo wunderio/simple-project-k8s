@@ -25,6 +25,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "name": { "type": "string" },
           "hostname": { "type": "string" },
           "ssl": { 
             "type": "object",
@@ -112,14 +113,14 @@
             "requests": {
               "type": "object",
               "properties": {
-                "cpu": { "type": "string" },
+                "cpu": { "type": ["integer", "string"] },
                 "memory": { "type": "string" }
               }
             },
             "limits": {
               "type": "object",
               "properties": {
-                "cpu": { "type": "string" },
+                "cpu": { "type": ["integer", "string"] },
                 "memory": { "type": "string" }
               }
             }
@@ -149,11 +150,23 @@
           "additionalProperties": { "type": "string"}
         },
         "real_ip_header": { "type": "string"},
-        "security_headers": { "type": "object" },
+        "security_headers": { "type": [ "object", "array" ] },
         "hsts_include_subdomains": { "type": "string" },
         "serverExtraConfig": { "type": "string" },
         "locationExtraConfig": { "type": "string" },
-        "extraConfig": { "type": "string" }
+        "extraConfig": { "type": "string" },
+        "redirects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "signalsciences": {
@@ -172,14 +185,14 @@
             "requests": {
               "type": "object",
               "properties": {
-                "cpu": { "type": "string" },
+                "cpu": { "type": ["integer", "string"] },
                 "memory": { "type": "string" }
               }
             },
             "limits": {
               "type": "object",
               "properties": {
-                "cpu": { "type": "string" },
+                "cpu": { "type": ["integer", "string"] },
                 "memory": { "type": "string" }
               }
             }
