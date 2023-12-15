@@ -10,6 +10,7 @@ executors:
 
 jobs:
   site-test:
+    resource_class: small
     docker:
       - image: alpine/curl
     steps:
