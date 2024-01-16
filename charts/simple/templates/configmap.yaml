@@ -142,6 +142,9 @@ data:
         server_name simple;
         listen 8080;
 
+        port_in_redirect off;
+        server_name_in_redirect off;
+
         # Loadbalancer health checks need to be fed with http 200
         if ($hc_ua) { return 200; }
 
@@ -157,7 +160,6 @@ data:
 
         root /var/www/html/web;
         index index.html;
-        port_in_redirect off;
 
         include fastcgi.conf;
 
