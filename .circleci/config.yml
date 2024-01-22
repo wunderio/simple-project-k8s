@@ -35,7 +35,7 @@ workflows:
   build_deploy:
     jobs:
       - silta/simple-build-deploy: &build-deploy
-          name: 'Build & deploy'
+          name: 'Build & deploy master'
           executor: node16
           build_folder: hello
 
@@ -58,8 +58,31 @@ workflows:
           silta_config: silta/silta.yml
           filters:
             branches:
+              only: 
+                - master
+
+      - approval:
+          type: approval
+          name: "Deployment approval"
+          filters:
+            branches:
               ignore:
                 - production
+                - master
+                - /feature\/test-cluster\/.*/
+                - /feature\/aws\/.*/
+                - cm-upgrade
+
+      - silta/simple-build-deploy:
+          <<: *build-deploy
+          name: 'Build & deploy'
+          requires:
+            - "Deployment approval"
+          filters:
+            branches:
+              ignore:
+                - production
+                - master
                 - /feature\/test-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
@@ -117,7 +140,7 @@ workflows:
                 - master
     jobs:
       - silta/simple-build-deploy: &build-deploy
-          name: 'Build & deploy'
+          name: 'Build & deploy master'
           executor: node16
           build_folder: hello
 
@@ -160,7 +183,7 @@ workflows:
       - site-test:
           name: 'Site test'
           requires:
-            - 'Build & deploy'
+            - 'Build & deploy master'
             - 'Build & deploy master to aks cluster'
           filters:
             branches:
