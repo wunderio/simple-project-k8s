@@ -151,8 +151,8 @@ data:
 
         {{- if ne .Values.nginx.x_proxy_auth "" }}
         # Block request if magic header is set and does not match required value
-        if (!$proxy_auth) { return 403; }
-        {{- end}}
+        if ($proxy_auth = 0) { return 403; }
+        {{- end }}
 
         {{- if .Values.nginx.redirects }}
         # Redirects to specified path if map returns anything
