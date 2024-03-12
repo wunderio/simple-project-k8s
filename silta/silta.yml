@@ -3,3 +3,9 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+nginx:
+  x_proxy_auth: "tsT9876"
+
+exposeDomains:
+  k8s:
+    hostname: simple-k8s-staging.fastly.wdr.io
