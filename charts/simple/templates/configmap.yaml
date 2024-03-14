@@ -180,11 +180,6 @@ data:
 
         location / {
 
-          {{- if ne .Values.nginx.x_proxy_auth "" }}
-          # Verify if x_proxy_auth value is correct
-          if ( $http_x_proxy_auth != '{{ .Values.nginx.x_proxy_auth }}') { return 403; }
-          {{- end}}
-
             # Custom configuration include
             {{ if .Values.nginx.locationExtraConfig }}
             {{ .Values.nginx.locationExtraConfig | nindent 10 }}
