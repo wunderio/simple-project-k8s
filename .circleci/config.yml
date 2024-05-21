@@ -43,7 +43,7 @@ workflows:
           # Don't copy this! We only use following 2 lines for chart development in this repository.
           chart_name: "./charts/simple"
           chart_repository: ""
-
+          silta_cli_version: test
           #Executes after logging into cluster, docker
           pre-release:
             - run:
