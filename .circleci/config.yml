@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  silta: silta/silta@dev:master
+  silta: silta/silta@dev:proxy
 
 executors:
   node16:
@@ -39,7 +39,7 @@ workflows:
           executor: node16
           build_folder: hello
 
-          # Use a local chart during development. 
+          # Use a local chart during development.
           # Don't copy this! We only use following 2 lines for chart development in this repository.
           chart_name: "./charts/simple"
           chart_repository: ""
@@ -58,7 +58,7 @@ workflows:
           silta_config: silta/silta.yml
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - approval:
@@ -95,7 +95,7 @@ workflows:
           context: silta_aks
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - site-test:
@@ -105,7 +105,7 @@ workflows:
             - 'Build & deploy master to aks cluster'
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - silta/simple-build-deploy:
@@ -116,7 +116,7 @@ workflows:
           context: silta_test
           filters:
             branches:
-              only: 
+              only:
                 - /feature\/test-cluster\/.*/
 
       - silta/simple-build-deploy:
@@ -127,7 +127,7 @@ workflows:
           context: silta_aws
           filters:
             branches:
-              only: 
+              only:
                 - /feature\/aws\/.*/
 
   weekly-build:
@@ -144,7 +144,7 @@ workflows:
           executor: node16
           build_folder: hello
 
-          # Use a local chart during development. 
+          # Use a local chart during development.
           # Don't copy this! We only use following 2 lines for chart development in this repository.
           chart_name: "./charts/simple"
           chart_repository: ""
@@ -177,7 +177,7 @@ workflows:
           context: silta_aks
           filters:
             branches:
-              only: 
+              only:
                 - master
 
       - site-test:
@@ -187,5 +187,5 @@ workflows:
             - 'Build & deploy master to aks cluster'
           filters:
             branches:
-              only: 
+              only:
                 - master
