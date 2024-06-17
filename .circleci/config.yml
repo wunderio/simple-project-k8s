@@ -7,8 +7,18 @@ executors:
   node16:
     docker:
       - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-v1
+  node20:
+    docker:
+      - image: wunderio/silta-cicd:circleci-php8.2-node20-composer2-helm-unittest-upgrade-test20240614
 
 jobs:
+  validate:
+    executor: node20
+    steps:
+      - checkout
+      - run:
+          name: Helm unit tests
+          command: helm unittest ./charts/simple
   site-test:
     resource_class: small
     docker:
@@ -34,9 +44,12 @@ workflows:
   version: 2
   build_deploy:
     jobs:
+      - validate:
+          name: 'Validate simple chart'
+
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy master'
-          executor: node16
+          executor: node20
           build_folder: hello
 
           # Use a local chart during development.
@@ -142,7 +155,7 @@ workflows:
     jobs:
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy master'
-          executor: node16
+          executor: node20
           build_folder: hello
 
           # Use a local chart during development.
