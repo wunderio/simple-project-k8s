@@ -7,13 +7,10 @@ executors:
   node16:
     docker:
       - image: wunderio/silta-cicd:circleci-php8.0-node16-composer2-v1
-  node20:
-    docker:
-      - image: wunderio/silta-cicd:circleci-php8.2-node20-composer2-helm-unittest-upgrade-test20240614
 
 jobs:
   validate:
-    executor: node20
+    executor: node16
     steps:
       - checkout
       - run:
@@ -49,7 +46,7 @@ workflows:
 
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy master'
-          executor: node20
+          executor: node16
           build_folder: hello
 
           # Use a local chart during development.
@@ -155,7 +152,7 @@ workflows:
     jobs:
       - silta/simple-build-deploy: &build-deploy
           name: 'Build & deploy master'
-          executor: node20
+          executor: node16
           build_folder: hello
 
           # Use a local chart during development.
