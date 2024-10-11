@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  silta: silta/silta@dev:pullsecrets
+  silta: silta/silta@dev:master
 
 executors:
   node16:
@@ -57,11 +57,11 @@ workflows:
           chart_name: "./charts/simple"
           chart_repository: ""
 
-          codebase-build:
-            - run:
-                name: Download feature branch build of silta cli
-                command: |
-                  curl -sL https://github.com/wunderio/silta-cli/releases/download/test/silta-test-linux-amd64.tar.gz | tar xz -C ~/.local/bin
+          # codebase-build:
+          #   - run:
+          #       name: Download feature branch build of silta cli
+          #       command: |
+          #         curl -sL https://github.com/wunderio/silta-cli/releases/download/test/silta-test-linux-amd64.tar.gz | tar xz -C ~/.local/bin
 
           #Executes after logging into cluster, docker
           pre-release:
