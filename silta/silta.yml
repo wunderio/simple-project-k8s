@@ -3,3 +3,5 @@
 #
 # See https://github.com/wunderio/charts/blob/master/simple/values.yaml
 # for all possible options.
+
+imagePullSecret: "CnsKICAiYXV0aHMiOiB7CiAgICAiaHR0cHM6Ly9pbmRleC5kb2NrZXIuaW8vdjEvIjogewogICAgICAiYXV0aCI6ICJiYXNlNjQodXNlcm5hbWU6cGFzc3dvcmQpIgogICAgfQogIH0KfQo="
