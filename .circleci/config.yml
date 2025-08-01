@@ -87,6 +87,7 @@ workflows:
                 - production
                 - master
                 - /feature\/test-cluster\/.*/
+                - /feature\/test-b-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
 
@@ -101,6 +102,7 @@ workflows:
                 - production
                 - master
                 - /feature\/test-cluster\/.*/
+                - /feature\/test-b-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
 
@@ -135,6 +137,17 @@ workflows:
             branches:
               only:
                 - /feature\/test-cluster\/.*/
+
+      - silta/simple-build-deploy:
+          # Extend the build-deploy configuration for the test-b cluster deployments
+          <<: *build-deploy
+          name: 'Build & deploy to test-b cluster'
+          silta_config: silta/silta.yml,silta/silta-test-b.yml
+          context: silta_test_b
+          filters:
+            branches:
+              only:
+                - /feature\/test-b-cluster\/.*/
 
       - silta/simple-build-deploy:
           # Extend the build-deploy configuration for the aws cluster deployments
@@ -183,6 +196,7 @@ workflows:
               ignore:
                 - production
                 - /feature\/test-cluster\/.*/
+                - /feature\/test-b-cluster\/.*/
                 - /feature\/aws\/.*/
                 - cm-upgrade
 
