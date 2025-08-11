@@ -193,7 +193,7 @@ signalsciences:
   accesskeyid: ""
   secretaccesskey: ""
   image: signalsciences/sigsci-agent
-  imageTag: 4.40.0
+  imageTag: latest
   # sidecar container resources
   resources:
     requests:
